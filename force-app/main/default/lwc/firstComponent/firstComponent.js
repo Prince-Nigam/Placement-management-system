@@ -1,20 +1,14 @@
-import { LightningElement } from 'lwc';
+import { LightningElement, wire } from 'lwc';
+import getAllStudent from '@salesforce/apex/StudentController.getAllStudent';
 
 export default class FirstComponent extends LightningElement {
-    name = ' ';
-    rollNo = ' ';
 
-    storeName(event){
-        this.name = event.target.value;
-        console.log("Name : ",this.name);
-    }
-
-    storeRollNo(event){
-        this.rollNo = event.target.value;
-        console.log('Roll No : ',this.rollNo);
-    }
-
-    createstudent(){
-        alert(`Student Created Successfully. Name : ${this.name} Roll Number : ${this.rollNo}`);
+    @wire(getAllStudent)
+    wiredStudent({ error, data }) {
+        if (data) {
+            console.log('Data : ', data);
+        } else if (error) {
+            console.log('Error : ', error);
+        }
     }
 }

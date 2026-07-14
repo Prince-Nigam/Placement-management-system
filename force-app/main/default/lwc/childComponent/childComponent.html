@@ -1,0 +1,10 @@
+<template>
+    <p>This is child Component</p>
+    <template for:each={childstudent} for:item="student">
+        <div key={student.name}>
+            <p>Name : {student.name}</p>
+            <p>CGPA : {student.cgpa}</p>
+            <button data-name={student.name} onclick={sendDataToParent}>Send to Parent</button>
+        </div>
+    </template>
+</template>
