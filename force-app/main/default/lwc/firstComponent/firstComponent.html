@@ -1,19 +1,11 @@
 <template>
-
-    <template for:each={students} for:item="student">
-        <lightning-card title={student.name} key={student.id}>
-            <p class="slds-p-horizontal_small">My id is: {student.id}</p>
-            <lightning-button label="Check Eligibility" slot="actions" onclick={checkIfEligible}></lightning-button>
-
-            <template lwc:if={isExecuted}>
-                <template lwc:if={student.isEligible}>
-                    <p>My CGPA is : {student.cgpa} and I am Eligible</p>
-                </template>
-                <template lwc:else>
-                    <p>My CGPA is : {student.cgpa} and I am notEligible</p>
-                </template>
-            </template>
-        </lightning-card>
-    </template>
-
+    <lightning-card  title="Student Registration Portal">
+        <lightning-button label="Submit" slot="actions" onclick={createstudent}></lightning-button>
+    
+            <div class="slds-p-around_medium lgc-bg">
+            <lightning-input type="text" label="Enter name" value={name} onchange={storeName}></lightning-input>
+            <lightning-input type="text" label="Enter Roll Number" value={rollNo} onchange={storeRollNo}></lightning-input>
+        </div>
+        <p slot="footer">Card Footer</p>
+    </lightning-card>
 </template> 
