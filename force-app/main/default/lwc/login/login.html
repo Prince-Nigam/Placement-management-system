@@ -1,0 +1,52 @@
+<template>
+    
+    <div class="login-page">
+        <div class="left-panel">
+            <div class="brand-block">
+                <div class="logo-mark">
+                    <span class="logo-letter">SM</span>
+                </div>
+                <h1 class="brand-title">Student Management</h1>
+                <p class="brand-tagline">Placement, Progress and People</p>
+            </div>
+
+        <ul class="feature-list">
+            <li>
+                <lightning-icon icon-name="utility:user" size="x-small" class="feature-icon"></lightning-icon>
+                <span>Manage Student records</span>
+            </li>
+        </ul>
+        </div>
+
+        <div class="right-panel">
+            <div class="form-card">
+                <div class="form-header">
+                    <h2 class="form-title">Sign In</h2>
+                    <p class="form-subtitle">Enter your credentials to continue</p>
+                </div>
+            </div>
+
+            <div class="form-body">
+                <div class="field-group">
+                    <label class="field-label" for="username">Username</label>
+                    <div class="input-wrap">
+                        <input class="field-input" type="text" placeholder="example@gmail.com" id="username" />
+                    </div>
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label" for="password">Password</label>
+                    <div class="input-wrap">
+                        <input class="field-input" type="password" placeholder="example@gmail.com" id="password" />
+                    </div>
+                </div>
+
+                <button class="login-btn" onclick={loginuser}>
+                    Sign In
+                </button>
+
+            </div>
+
+        </div>
+    </div>
+</template>

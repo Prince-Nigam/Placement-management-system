@@ -1,0 +1,121 @@
+<template>
+    <div class="dashboard">
+        <div class="page-body">
+
+            <div class="page-header">
+                <div>
+                    <h1 class="page-title">Placement Dashboard</h1>
+                    <p class="page-sub">Students selected by companies this cycle</p>
+                </div>
+                <div class="header-actions">
+                    <div class="search-wrap">
+                        <lightning-icon icon-name="utility:search" size="x-small" class="search-icon"></lightning-icon>
+                        <input
+                            type="text"
+                            class="search-input"
+                            placeholder="Search students or companies..."
+                            value={searchTerm}
+                            onchange={handleSearch} />
+                    </div>
+                    <div class="filter-group">
+                        <button
+                            class={allFilterClass}
+                            onclick={filterAll}
+                            data-filter="all">All</button>
+                        <button
+                            class={placedFilterClass}
+                            onclick={filterPlaced}
+                            data-filter="placed">Placed</button>
+                        <button
+                            class={pendingFilterClass}
+                            onclick={filterPending}
+                            data-filter="pending">Opted Out</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="stat-row">
+                <div class="stat-card">
+                    <p class="stat-label">Total Students</p>
+                    <p class="stat-value">{totalStudents}</p>
+                </div>
+                <div class="stat-card stat-accent">
+                    <p class="stat-label">Placed</p>
+                    <p class="stat-value stat-value-accent">{placedCount}</p>
+                </div>
+                <div class="stat-card">
+                    <p class="stat-label">Pending</p>
+                    <p class="stat-value">{pendingCount}</p>
+                </div>
+            </div>
+
+            <div class="table-card">
+                <div class="table-header-row">
+                    <h2 class="table-heading">Selected Students</h2>
+                    <span class="table-count">{filteredCount} records</span>
+                </div>
+
+                <div class="table-wrap">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Student</th>
+                                <th>Branch</th>
+                                <th>CGPA</th>
+                                <th>Company</th>
+                                <th>Role</th>
+                                <th>Package (LPA)</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <template for:each={filteredStudents} for:item="s">
+                                <tr key={s.id} class="table-row">
+                                    <td>
+                                        <div class="student-cell">
+                                            <div class="avatar" style={s.avatarStyle}>
+                                                {s.initials}
+                                            </div>
+                                            <div>
+                                                <p class="student-name">{s.name}</p>
+                                                <p class="student-id">{s.rollNo}</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="cell-muted">{s.branch}</td>
+                                    <td>
+                                        <span class={s.cgpaClass}>{s.cgpa}</span>
+                                    </td>
+                                    <td>
+                                        <div class="company-cell">
+                                            <div class="company-logo" style={s.companyLogoStyle}>
+                                                {s.companyInitial}
+                                            </div>
+                                            <span class="company-name">{s.company}</span>
+                                        </div>
+                                    </td>
+                                    <td class="cell-muted">{s.role}</td>
+                                    <td>
+                                        <span class="package-badge">{s.package}</span>
+                                    </td>
+                                    <td>
+                                        <span class={s.statusClass}>{s.status}</span>
+                                    </td>
+                                </tr>
+                            </template>
+                        </tbody>
+                    </table>
+
+                    <template if:true={isEmpty}>
+                        <div class="empty-state">
+                            <lightning-icon icon-name="utility:search" size="medium" class="empty-icon"></lightning-icon>
+                            <p class="empty-title">No students found</p>
+                            <p class="empty-sub">Try adjusting your search or filter.</p>
+                        </div>
+                    </template>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</template>
