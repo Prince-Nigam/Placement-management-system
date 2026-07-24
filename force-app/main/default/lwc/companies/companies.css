@@ -1,0 +1,231 @@
+/* ── Design tokens ──────────────────────────────────────────────────────── */
+:host {
+    --navy-deep:       #0f1b2d;
+    --navy-mid:        #162234;
+    --navy-surface:    #1a2a40;
+    --navy-border:     #1e3a5f;
+    --navy-border-mid: #243d5e;
+    --accent:          #4dabf7;
+    --accent-dim:      rgba(77,171,247,0.14);
+    --white:           #ffffff;
+    --slate-100:       #e2e8f0;
+    --slate-300:       #cbd5e1;
+    --slate-400:       #94a3b8;
+    --slate-500:       #64748b;
+    --green:           #5dcaa5;
+    --green-dim:       rgba(93,202,165,0.15);
+    --amber:           #ef9f27;
+    --amber-dim:       rgba(239,159,39,0.15);
+    --red-soft:        #f87171;
+    --red-dim:         rgba(248,113,113,0.14);
+    --radius-sm:       6px;
+    --radius-md:       10px;
+    --radius-lg:       14px;
+    --transition:      0.16s ease;
+
+    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+    display: block;
+    background: var(--navy-deep);
+    min-height: 100vh;
+}
+
+
+/* ── Page wrapper ───────────────────────────────────────────────────────── */
+.companies-page {
+    padding: 1.75rem 2rem;
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+/* ── Page header ────────────────────────────────────────────────────────── */
+.page-header {
+    margin-bottom: 1.5rem;
+}
+
+.page-title {
+    font-size: 1.55rem;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: var(--white);
+    margin: 0 0 0.25rem;
+}
+
+.page-sub {
+    font-size: 0.875rem;
+    color: var(--slate-400);
+    margin: 0;
+}
+
+/* ── Detail overlay ─────────────────────────────────────────────────────── */
+.detail-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.65);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    backdrop-filter: blur(4px);
+    padding: 1rem;
+}
+
+.detail-card {
+    background: var(--navy-mid);
+    border: 1px solid var(--navy-border);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    width: 100%;
+    max-width: 440px;
+    position: relative;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.close-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: rgba(255, 255, 255, 0.06);
+    border: none;
+    color: var(--slate-400);
+    font-size: 1rem;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background var(--transition), color var(--transition);
+}
+
+.close-btn:hover {
+    background: rgba(248, 113, 113, 0.12);
+    color: var(--red-soft);
+}
+
+.detail-logo {
+    width: 64px;
+    height: 64px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: var(--navy-deep);
+    margin-bottom: 1rem;
+}
+
+.detail-name {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--white);
+    margin: 0 0 1.5rem;
+}
+
+.detail-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+}
+
+/* ── Company grid ───────────────────────────────────────────────────────── */
+.company-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 20px;
+}
+
+.company-card {
+    background: var(--navy-surface);
+    border: 1px solid var(--navy-border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    transition: border-color .2s ease, transform .2s ease, box-shadow .2s ease;
+    cursor: pointer;
+}
+
+.company-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-4px);
+    box-shadow: 0 10px 24px rgba(0,0,0,.25);
+}
+
+.company-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 18px;
+    background: var(--navy-mid);
+    border-bottom: 1px solid var(--navy-border);
+}
+
+.company-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 10px;
+    background: var(--accent-dim);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 22px;
+}
+
+.company-header h2 {
+    margin: 0;
+    color: var(--white);
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.company-body {
+    padding: 18px;
+}
+
+.field {
+    margin-bottom: 18px;
+}
+
+.field:last-child {
+    margin-bottom: 0;
+}
+
+.field label {
+    display: block;
+    color: var(--slate-500);
+    font-size: 11px;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: .08em;
+    margin-bottom: 6px;
+}
+
+.field p {
+    margin: 0;
+    color: var(--white);
+}
+
+.field a {
+    color: var(--accent);
+    text-decoration: none;
+}
+
+.field a:hover {
+    text-decoration: underline;
+}
+
+.cgpa-badge {
+    display: inline-block;
+    padding: 6px 14px;
+    border-radius: 20px;
+    background: var(--green-dim);
+    color: var(--green);
+    font-weight: 600;
+}
+
+/* ── Responsive ─────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+    .companies-page { padding: 1.25rem; }
+    .company-grid { grid-template-columns: 1fr; }
+    .detail-card { padding: 1.5rem; }
+}

@@ -5,7 +5,7 @@
             <div class="page-header">
                 <div>
                     <h1 class="page-title">Placement Dashboard</h1>
-                    <p class="page-sub">Students selected by companies this cycle</p>
+                    <p class="page-sub">Placement cycle 2025–26 · Live data</p>
                 </div>
                 <div class="header-actions">
                     <div class="search-wrap">
@@ -18,40 +18,68 @@
                             onchange={handleSearch} />
                     </div>
                     <div class="filter-group">
-                        <button
-                            class={allFilterClass}
-                            onclick={filterAll}
-                            data-filter="all">All</button>
-                        <button
-                            class={placedFilterClass}
-                            onclick={filterPlaced}
-                            data-filter="placed">Placed</button>
-                        <button
-                            class={pendingFilterClass}
-                            onclick={filterPending}
-                            data-filter="pending">Opted Out</button>
+                        <button class={allFilterClass}      onclick={filterAll}>All</button>
+                        <button class={placedFilterClass}   onclick={filterPlaced}>Placed</button>
+                        <button class={pendingFilterClass}  onclick={filterPending}>Pending</button>
+                        <button class={optedOutFilterClass} onclick={filterOptedOut}>Opted Out</button>
                     </div>
                 </div>
             </div>
 
+            <!-- Stat cards -->
             <div class="stat-row">
                 <div class="stat-card">
+                    <lightning-icon icon-name="utility:people" size="x-small" class="stat-icon"></lightning-icon>
                     <p class="stat-label">Total Students</p>
                     <p class="stat-value">{totalStudents}</p>
                 </div>
-                <div class="stat-card stat-accent">
+                <div class="stat-card stat-placed">
+                    <lightning-icon icon-name="utility:check" size="x-small" class="stat-icon stat-icon-placed"></lightning-icon>
                     <p class="stat-label">Placed</p>
-                    <p class="stat-value stat-value-accent">{placedCount}</p>
+                    <p class="stat-value stat-value-placed">{placedCount}</p>
                 </div>
-                <div class="stat-card">
+                <div class="stat-card stat-pending">
+                    <lightning-icon icon-name="utility:clock" size="x-small" class="stat-icon stat-icon-pending"></lightning-icon>
                     <p class="stat-label">Pending</p>
-                    <p class="stat-value">{pendingCount}</p>
+                    <p class="stat-value stat-value-pending">{pendingCount}</p>
+                </div>
+                <div class="stat-card stat-optedout">
+                    <lightning-icon icon-name="utility:close" size="x-small" class="stat-icon stat-icon-optedout"></lightning-icon>
+                    <p class="stat-label">Opted Out</p>
+                    <p class="stat-value stat-value-optedout">{optedOutCount}</p>
+                </div>
+                <div class="stat-card stat-avg">
+                    <lightning-icon icon-name="utility:moneybag" size="x-small" class="stat-icon stat-icon-avg"></lightning-icon>
+                    <p class="stat-label">Avg Package</p>
+                    <p class="stat-value stat-value-avg">{avgPackage} LPA</p>
+                </div>
+                <div class="stat-card stat-rate">
+                    <lightning-icon icon-name="utility:chart" size="x-small" class="stat-icon"></lightning-icon>
+                    <p class="stat-label">Placement Rate</p>
+                    <p class="stat-value stat-value-rate">{placementRate}%</p>
+                    <div class="rate-bar-bg">
+                        <div class="rate-bar-fill" style={rateBarStyle}></div>
+                    </div>
                 </div>
             </div>
 
+            <!-- Top Companies mini-strip -->
+            <div class="top-companies-row">
+                <p class="section-label">Top Recruiters</p>
+                <div class="top-companies-list">
+                    <template for:each={topCompanies} for:item="c">
+                        <div key={c.key} class="top-co-chip">
+                            <span class="top-co-name">{c.name}</span>
+                            <span class="top-co-count">{c.count}</span>
+                        </div>
+                    </template>
+                </div>
+            </div>
+
+            <!-- Main table -->
             <div class="table-card">
                 <div class="table-header-row">
-                    <h2 class="table-heading">Selected Students</h2>
+                    <h2 class="table-heading">Student Placements</h2>
                     <span class="table-count">{filteredCount} records</span>
                 </div>
 
@@ -64,7 +92,7 @@
                                 <th>CGPA</th>
                                 <th>Company</th>
                                 <th>Role</th>
-                                <th>Package (LPA)</th>
+                                <th>Package</th>
                                 <th>Status</th>
                             </tr>
                         </thead>
@@ -73,9 +101,7 @@
                                 <tr key={s.id} class="table-row">
                                     <td>
                                         <div class="student-cell">
-                                            <div class="avatar" style={s.avatarStyle}>
-                                                {s.initials}
-                                            </div>
+                                            <div class="avatar" style={s.avatarStyle}>{s.initials}</div>
                                             <div>
                                                 <p class="student-name">{s.name}</p>
                                                 <p class="student-id">{s.rollNo}</p>
@@ -83,30 +109,22 @@
                                         </div>
                                     </td>
                                     <td class="cell-muted">{s.branch}</td>
-                                    <td>
-                                        <span class={s.cgpaClass}>{s.cgpa}</span>
-                                    </td>
+                                    <td><span class={s.cgpaClass}>{s.cgpa}</span></td>
                                     <td>
                                         <div class="company-cell">
-                                            <div class="company-logo" style={s.companyLogoStyle}>
-                                                {s.companyInitial}
-                                            </div>
+                                            <div class="company-logo" style={s.companyLogoStyle}>{s.companyInitial}</div>
                                             <span class="company-name">{s.company}</span>
                                         </div>
                                     </td>
                                     <td class="cell-muted">{s.role}</td>
-                                    <td>
-                                        <span class="package-badge">{s.package}</span>
-                                    </td>
-                                    <td>
-                                        <span class={s.statusClass}>{s.status}</span>
-                                    </td>
+                                    <td><span class="package-badge">{s.packageDisplay}</span></td>
+                                    <td><span class={s.statusClass}>{s.status}</span></td>
                                 </tr>
                             </template>
                         </tbody>
                     </table>
 
-                    <template if:true={isEmpty}>
+                    <template lwc:if={isEmpty}>
                         <div class="empty-state">
                             <lightning-icon icon-name="utility:search" size="medium" class="empty-icon"></lightning-icon>
                             <p class="empty-title">No students found</p>

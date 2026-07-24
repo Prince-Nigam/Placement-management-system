@@ -1,0 +1,6 @@
+:host {
+    display: block;
+    background: #0f1b2d;
+    min-height: 100vh;
+    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+}

@@ -33,12 +33,11 @@
     box-shadow: 0 2px 16px rgba(0, 0, 0, 0.35);
 }
 
-/* ── Brand ──────────────────────────────────────────────────────────────── */
-.navbar-brand {
+/* ── Brand left ─────────────────────────────────────────────────────────── */
+.navbar-left {
     display: flex;
     align-items: center;
-    gap: 0.55rem;
-    text-decoration: none;
+    gap: 0.7rem;
     user-select: none;
 }
 

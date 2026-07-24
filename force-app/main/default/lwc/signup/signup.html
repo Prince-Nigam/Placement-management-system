@@ -1,0 +1,161 @@
+<template>
+    <div class="auth-page">
+
+        <!-- ── Left Branding Panel ── -->
+        <div class="left-panel">
+            <div class="brand-block">
+                <div class="logo-mark">
+                    <span class="logo-letter">SM</span>
+                </div>
+                <h1 class="brand-title">Student Management</h1>
+                <p class="brand-tagline">Placement, Progress and People</p>
+            </div>
+
+            <ul class="feature-list">
+                <li>
+                    <lightning-icon icon-name="utility:user" size="x-small" class="feature-icon"></lightning-icon>
+                    <span>Create your student profile</span>
+                </li>
+                <li>
+                    <lightning-icon icon-name="utility:company" size="x-small" class="feature-icon"></lightning-icon>
+                    <span>Explore company drives</span>
+                </li>
+                <li>
+                    <lightning-icon icon-name="utility:check" size="x-small" class="feature-icon"></lightning-icon>
+                    <span>Track your placement journey</span>
+                </li>
+                <li>
+                    <lightning-icon icon-name="utility:chart" size="x-small" class="feature-icon"></lightning-icon>
+                    <span>Real-time analytics dashboard</span>
+                </li>
+            </ul>
+
+            <p class="left-footer">© 2026 Student Placement Cell</p>
+        </div>
+
+        <!-- ── Right Signup Panel ── -->
+        <div class="right-panel">
+            <div class="form-card">
+
+                <div class="form-header">
+                    <h2 class="form-title">Create Account</h2>
+                    <p class="form-subtitle">Join the placement portal today</p>
+                </div>
+
+                <div class="form-body">
+
+                    <!-- Full Name -->
+                    <div class="field-group">
+                        <label class="field-label" for="fullname">Full Name</label>
+                        <div class="input-wrap">
+                            <lightning-icon icon-name="utility:user" size="x-small" class="input-icon"></lightning-icon>
+                            <input
+                                class="field-input"
+                                type="text"
+                                id="fullname"
+                                placeholder="Aman Jaiswal"
+                                value={fullName}
+                                onchange={handleFullName} />
+                        </div>
+                    </div>
+
+                    <!-- Email -->
+                    <div class="field-group">
+                        <label class="field-label" for="email">Email Address</label>
+                        <div class="input-wrap">
+                            <lightning-icon icon-name="utility:email" size="x-small" class="input-icon"></lightning-icon>
+                            <input
+                                class="field-input"
+                                type="email"
+                                id="email"
+                                placeholder="your@college.edu"
+                                value={email}
+                                onchange={handleEmail} />
+                        </div>
+                    </div>
+
+                    <!-- Password -->
+                    <div class="field-group">
+                        <label class="field-label" for="password">Password</label>
+                        <div class="input-wrap">
+                            <lightning-icon icon-name="utility:lock" size="x-small" class="input-icon"></lightning-icon>
+                            <input
+                                class={passwordClass}
+                                type={passwordType}
+                                id="password"
+                                placeholder="Min. 6 characters"
+                                value={password}
+                                onchange={handlePassword} />
+                            <button class="toggle-btn" onclick={togglePassword} type="button">
+                                <lightning-icon icon-name={passwordIcon} size="x-small"></lightning-icon>
+                            </button>
+                        </div>
+                        <template lwc:if={showStrength}>
+                            <div class="strength-bar">
+                                <div class={strengthFillClass}></div>
+                            </div>
+                            <p class={strengthLabelClass}>{strengthLabel}</p>
+                        </template>
+                    </div>
+
+                    <!-- Confirm Password -->
+                    <div class="field-group">
+                        <label class="field-label" for="confirmPassword">Confirm Password</label>
+                        <div class="input-wrap">
+                            <lightning-icon icon-name="utility:lock" size="x-small" class="input-icon"></lightning-icon>
+                            <input
+                                class={confirmClass}
+                                type="password"
+                                id="confirmPassword"
+                                placeholder="Re-enter your password"
+                                value={confirmPassword}
+                                onchange={handleConfirm} />
+                            <template lwc:if={confirmPassword}>
+                                <lightning-icon
+                                    icon-name={confirmIcon}
+                                    size="x-small"
+                                    class={confirmIconClass}>
+                                </lightning-icon>
+                            </template>
+                        </div>
+                    </div>
+
+                    <!-- Error -->
+                    <template lwc:if={errorMessage}>
+                        <div class="error-banner">
+                            <lightning-icon icon-name="utility:error" size="x-small" class="error-icon"></lightning-icon>
+                            {errorMessage}
+                        </div>
+                    </template>
+
+                    <!-- Success -->
+                    <template lwc:if={successMessage}>
+                        <div class="success-banner">
+                            <lightning-icon icon-name="utility:success" size="x-small" class="success-icon"></lightning-icon>
+                            {successMessage}
+                        </div>
+                    </template>
+
+                    <!-- Submit -->
+                    <button class="submit-btn" onclick={handleSignup} disabled={isLoading}>
+                        <template lwc:if={isLoading}>
+                            <span class="spinner"></span>
+                            Creating account...
+                        </template>
+                        <template lwc:else>
+                            Create Account
+                        </template>
+                    </button>
+
+                    <!-- Switch to Login -->
+                    <p class="switch-text">
+                        Already have an account?
+                        <button class="switch-link" onclick={goToLogin} type="button">Sign in</button>
+                    </p>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</template>

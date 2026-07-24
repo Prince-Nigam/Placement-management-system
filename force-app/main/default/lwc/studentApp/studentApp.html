@@ -1,11 +1,26 @@
 <template>
 
     <template lwc:if={isLoggedIn}>
-        <c-navbar onlogout={logoutUser}></c-navbar>
-        <c-dashboard></c-dashboard>
+        <c-navbar onlogout={logoutUser} ontabchange={changeTab}></c-navbar>
+
+        <template lwc:if={isDashboard}>
+            <c-dashboard></c-dashboard>
+        </template>
+
+        <template lwc:elseif={isStudents}>
+            <c-students></c-students>
+        </template>
+
+        <template lwc:elseif={isCompany}>
+            <c-companies></c-companies>
+        </template>
+    </template>
+
+    <template lwc:elseif={showSignup}>
+        <c-signup onsignup={handleSignup} ongologin={goToLogin}></c-signup>
     </template>
 
     <template lwc:else>
-        <c-login onlogin={loginUser}></c-login>
+        <c-login onlogin={loginUser} ongosignup={goToSignup}></c-login>
     </template>
 </template>

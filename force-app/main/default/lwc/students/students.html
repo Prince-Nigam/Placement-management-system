@@ -1,0 +1,99 @@
+<template>
+    <div class="students-page">
+
+        <!-- Header -->
+        <div class="page-header">
+            <div>
+                <h1 class="page-title">Student Records</h1>
+                <p class="page-sub">{shownCount} of {totalCount} students</p>
+            </div>
+            <div class="header-right">
+                <div class="search-wrap">
+                    <lightning-icon icon-name="utility:search" size="x-small" class="search-icon"></lightning-icon>
+                    <input
+                        type="text"
+                        class="search-input"
+                        placeholder="Search name, roll, email..."
+                        onchange={handleSearch} />
+                </div>
+                <!-- Status filter -->
+                <div class="filter-group">
+                    <button class={allStatusClass}      onclick={filterStatusAll}>All</button>
+                    <button class={placedStatusClass}   onclick={filterStatusPlaced}>Placed</button>
+                    <button class={pendingStatusClass}  onclick={filterStatusPending}>Pending</button>
+                    <button class={optedOutStatusClass} onclick={filterStatusOptedOut}>Opted Out</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Branch filter pills -->
+        <div class="branch-filter-row">
+            <template for:each={branchFilters} for:item="b">
+                <button key={b.key} class={b.cls} data-branch={b.label} onclick={filterBranch}>{b.label}</button>
+            </template>
+        </div>
+
+        <!-- Table -->
+        <div class="table-container">
+            <table class="student-table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Student</th>
+                        <th>Branch</th>
+                        <th>Year</th>
+                        <th>CGPA</th>
+                        <th>Skills</th>
+                        <th>Apps</th>
+                        <th>Phone</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <template for:each={filteredStudents} for:item="student">
+                        <tr key={student.id}>
+                            <td class="id-cell">{student.rollNo}</td>
+                            <td>
+                                <div class="student-name-cell">
+                                    <div class="avatar" style={student.avatarStyle}>{student.nameInitial}</div>
+                                    <div>
+                                        <p class="student-full-name">{student.name}</p>
+                                        <p class="student-email-sub">{student.email}</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>{student.branch}</td>
+                            <td class="cell-center">
+                                <span class="year-badge">Y{student.year}</span>
+                            </td>
+                            <td>
+                                <span class="cgpa">{student.cgpa}</span>
+                            </td>
+                            <td>
+                                <div class="skills-container">
+                                    <template for:each={student.skills} for:item="skill">
+                                        <span key={skill} class="skill-pill">{skill}</span>
+                                    </template>
+                                </div>
+                            </td>
+                            <td class="cell-center">{student.applications}</td>
+                            <td class="phone-cell">{student.phone}</td>
+                            <td>
+                                <span class={student.statusClass}>{student.status}</span>
+                            </td>
+                        </tr>
+                    </template>
+                </tbody>
+            </table>
+
+            <template lwc:if={isEmpty}>
+                <div class="empty-state">
+                    <lightning-icon icon-name="utility:search" size="medium" class="empty-icon"></lightning-icon>
+                    <p class="empty-title">No students found</p>
+                    <p class="empty-sub">Try adjusting your search or filters.</p>
+                </div>
+            </template>
+        </div>
+
+    </div>
+</template>

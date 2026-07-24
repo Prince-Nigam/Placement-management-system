@@ -1,0 +1,128 @@
+<template>
+    <div class="companies-page">
+
+        <!-- Detail modal -->
+        <template lwc:if={hasSelected}>
+            <div class="detail-overlay" onclick={closeDetail}>
+                <div class="detail-card" onclick={stopProp}>
+                    <button class="close-btn" onclick={closeDetail}>✕</button>
+
+                    <div class="detail-logo" style={selectedCompany.logoStyle}>
+                        {selectedCompany.logoInitial}
+                    </div>
+                    <h2 class="detail-name">{selectedCompany.companyName}</h2>
+                    <span class={selectedCompany.domainClass}>{selectedCompany.domain}</span>
+
+                    <div class="detail-fields">
+                        <div class="detail-row">
+                            <div class="detail-field">
+                                <label>HR Contact</label>
+                                <a href={selectedCompany.hrMailto}>{selectedCompany.hrEmail}</a>
+                            </div>
+                            <div class="detail-field">
+                                <label>Job Role</label>
+                                <p>{selectedCompany.jobRole}</p>
+                            </div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-field">
+                                <label>Package Offered</label>
+                                <p class="highlight-val">{selectedCompany.package} LPA</p>
+                            </div>
+                            <div class="detail-field">
+                                <label>Min. CGPA</label>
+                                <p class="highlight-val">{selectedCompany.minCgpa}</p>
+                            </div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-field">
+                                <label>Drive Date</label>
+                                <p>{selectedCompany.driveDate}</p>
+                            </div>
+                            <div class="detail-field">
+                                <label>Open Positions</label>
+                                <p>{selectedCompany.openPositions}</p>
+                            </div>
+                        </div>
+                        <div class="detail-field full-width">
+                            <label>Eligible Branches</label>
+                            <p>{selectedCompany.eligibleBranches}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </template>
+
+        <!-- Page header -->
+        <div class="page-header">
+            <div>
+                <h1 class="page-title">Companies</h1>
+                <p class="page-sub">Recruiting partners · Click a card for full details</p>
+            </div>
+            <div class="search-wrap">
+                <lightning-icon icon-name="utility:search" size="x-small" class="search-icon"></lightning-icon>
+                <input
+                    type="text"
+                    class="search-input"
+                    placeholder="Search company or role..."
+                    onchange={handleSearch} />
+            </div>
+        </div>
+
+        <!-- Domain filter -->
+        <div class="domain-filter-row">
+            <template for:each={domainFilters} for:item="d">
+                <button key={d.key} class={d.cls} data-domain={d.label} onclick={filterDomain}>{d.label}</button>
+            </template>
+        </div>
+
+        <!-- Grid -->
+        <div class="company-grid">
+            <template for:each={filteredCompanies} for:item="company">
+                <div key={company.id} class="company-card" data-id={company.id} onclick={showDetail}>
+
+                    <div class="company-header">
+                        <div class="company-icon" style={company.logoStyle}>{company.logoInitial}</div>
+                        <div class="company-title-block">
+                            <h2 class="company-name-head">{company.companyName}</h2>
+                            <span class={company.domainClass}>{company.domain}</span>
+                        </div>
+                    </div>
+
+                    <div class="company-body">
+                        <div class="info-row">
+                            <div class="info-item">
+                                <span class="info-label">Role</span>
+                                <span class="info-value">{company.jobRole}</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Package</span>
+                                <span class="info-value package-val">{company.package} LPA</span>
+                            </div>
+                        </div>
+                        <div class="info-row">
+                            <div class="info-item">
+                                <span class="info-label">Min CGPA</span>
+                                <span class="cgpa-badge">{company.minCgpa}</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Positions</span>
+                                <span class="info-value">{company.openPositions}</span>
+                            </div>
+                        </div>
+                        <div class="info-item full-row">
+                            <span class="info-label">Drive Date</span>
+                            <span class="info-value">{company.driveDate}</span>
+                        </div>
+                        <div class="info-item full-row">
+                            <span class="info-label">Eligible</span>
+                            <span class="info-value eligible-val">{company.eligibleBranches}</span>
+                        </div>
+                    </div>
+
+                </div>
+            </template>
+        </div>
+
+    </div>
+</template>

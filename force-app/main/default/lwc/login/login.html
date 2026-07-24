@@ -1,6 +1,7 @@
 <template>
-    
-    <div class="login-page">
+    <div class="auth-page">
+
+        <!-- ── Left Branding Panel ── -->
         <div class="left-panel">
             <div class="brand-block">
                 <div class="logo-mark">
@@ -10,43 +11,116 @@
                 <p class="brand-tagline">Placement, Progress and People</p>
             </div>
 
-        <ul class="feature-list">
-            <li>
-                <lightning-icon icon-name="utility:user" size="x-small" class="feature-icon"></lightning-icon>
-                <span>Manage Student records</span>
-            </li>
-        </ul>
+            <ul class="feature-list">
+                <li>
+                    <lightning-icon icon-name="utility:user" size="x-small" class="feature-icon"></lightning-icon>
+                    <span>Manage student profiles &amp; records</span>
+                </li>
+                <li>
+                    <lightning-icon icon-name="utility:company" size="x-small" class="feature-icon"></lightning-icon>
+                    <span>Track company recruitment drives</span>
+                </li>
+                <li>
+                    <lightning-icon icon-name="utility:check" size="x-small" class="feature-icon"></lightning-icon>
+                    <span>Monitor placement status in real-time</span>
+                </li>
+                <li>
+                    <lightning-icon icon-name="utility:chart" size="x-small" class="feature-icon"></lightning-icon>
+                    <span>Placement analytics &amp; dashboard</span>
+                </li>
+            </ul>
+
+            <p class="left-footer">© 2026 Student Placement Cell</p>
         </div>
 
+        <!-- ── Right Login Panel ── -->
         <div class="right-panel">
             <div class="form-card">
+
                 <div class="form-header">
-                    <h2 class="form-title">Sign In</h2>
-                    <p class="form-subtitle">Enter your credentials to continue</p>
+                    <div class="greeting-badge">
+                        <lightning-icon icon-name="utility:key" size="x-small" class="badge-icon"></lightning-icon>
+                        Secure Login
+                    </div>
+                    <h2 class="form-title">Welcome back</h2>
+                    <p class="form-subtitle">Sign in to your placement portal</p>
+                </div>
+
+                <div class="form-body">
+
+                    <!-- Email -->
+                    <div class="field-group">
+                        <label class="field-label" for="username">Email Address</label>
+                        <div class="input-wrap">
+                            <lightning-icon icon-name="utility:email" size="x-small" class="input-icon"></lightning-icon>
+                            <input
+                                class="field-input"
+                                type="text"
+                                id="username"
+                                placeholder="your@email.com"
+                                value={username}
+                                onchange={handleUsername} />
+                        </div>
+                    </div>
+
+                    <!-- Password -->
+                    <div class="field-group">
+                        <label class="field-label" for="password">Password</label>
+                        <div class="input-wrap">
+                            <lightning-icon icon-name="utility:lock" size="x-small" class="input-icon"></lightning-icon>
+                            <input
+                                class="field-input"
+                                type={passwordType}
+                                id="password"
+                                placeholder="Enter your password"
+                                value={password}
+                                onchange={handlePassword} />
+                            <button class="toggle-btn" onclick={togglePassword} type="button">
+                                <lightning-icon icon-name={passwordIcon} size="x-small"></lightning-icon>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Error -->
+                    <template lwc:if={errorMessage}>
+                        <div class="error-banner">
+                            <lightning-icon icon-name="utility:error" size="x-small" class="error-icon"></lightning-icon>
+                            {errorMessage}
+                        </div>
+                    </template>
+
+                    <!-- Submit -->
+                    <button class="login-btn" onclick={loginUser} disabled={isLoading}>
+                        <template lwc:if={isLoading}>
+                            <span class="spinner"></span>
+                            Signing in...
+                        </template>
+                        <template lwc:else>
+                            Sign In
+                            <lightning-icon icon-name="utility:forward" size="x-small" class="btn-icon"></lightning-icon>
+                        </template>
+                    </button>
+
+                    <div class="divider-row">
+                        <span class="divider-line"></span>
+                        <span class="divider-text">or</span>
+                        <span class="divider-line"></span>
+                    </div>
+
+                    <!-- Switch to Signup -->
+                    <p class="switch-text">
+                        New here?
+                        <button class="switch-link" onclick={goToSignup} type="button">Create an account</button>
+                    </p>
+
+                    <p class="hint-text">
+                        <lightning-icon icon-name="utility:info" size="x-small" class="hint-icon"></lightning-icon>
+                        Use your registered college email &amp; password
+                    </p>
+
                 </div>
             </div>
-
-            <div class="form-body">
-                <div class="field-group">
-                    <label class="field-label" for="username">Username</label>
-                    <div class="input-wrap">
-                        <input class="field-input" type="text" placeholder="example@gmail.com" id="username" />
-                    </div>
-                </div>
-
-                <div class="field-group">
-                    <label class="field-label" for="password">Password</label>
-                    <div class="input-wrap">
-                        <input class="field-input" type="password" placeholder="example@gmail.com" id="password" />
-                    </div>
-                </div>
-
-                <button class="login-btn" onclick={loginuser}>
-                    Sign In
-                </button>
-
-            </div>
-
         </div>
+
     </div>
 </template>

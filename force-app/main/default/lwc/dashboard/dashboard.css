@@ -194,8 +194,11 @@
     padding: 1rem 1.25rem;
 }
 
-.stat-accent { border-color: rgba(77,171,247,0.35); }
-.stat-rate   { grid-column: span 1; }
+.stat-placed   { border-color: rgba(93,202,165,0.3);  }
+.stat-pending  { border-color: rgba(239,159,39,0.3);  }
+.stat-optedout { border-color: rgba(248,113,113,0.3); }
+.stat-avg      { border-color: rgba(129,140,248,0.3); }
+.stat-rate     { grid-column: span 1; }
 
 .stat-label {
     font-size: 0.75rem; font-weight: 600; letter-spacing: 0.04em;
@@ -208,8 +211,17 @@
     color: var(--white); margin: 0;
 }
 
-.stat-value-accent { color: var(--accent); }
-.stat-value-rate   { color: var(--green); }
+.stat-value-placed   { color: var(--green); }
+.stat-value-pending  { color: var(--amber); }
+.stat-value-optedout { color: var(--red-soft); }
+.stat-value-avg      { color: #818cf8; }
+.stat-value-rate     { color: var(--green); }
+
+.stat-icon { --lwc-colorTextIconDefault: var(--slate-500); margin-bottom: 0.5rem; display: block; }
+.stat-icon-placed   { --lwc-colorTextIconDefault: var(--green); }
+.stat-icon-pending  { --lwc-colorTextIconDefault: var(--amber); }
+.stat-icon-optedout { --lwc-colorTextIconDefault: var(--red-soft); }
+.stat-icon-avg      { --lwc-colorTextIconDefault: #818cf8; }
 
 /* Rate bar */
 .rate-bar-bg {
@@ -220,6 +232,56 @@
 .rate-bar-fill {
     height: 100%; background: var(--green); border-radius: 2px;
     transition: width 0.5s ease;
+}
+
+/* ── Top companies strip ────────────────────────────────────────────────── */
+.top-companies-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.section-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--slate-500);
+    margin: 0;
+    flex-shrink: 0;
+}
+
+.top-companies-list {
+    display: flex;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+}
+
+.top-co-chip {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    background: var(--navy-surface);
+    border: 1px solid var(--navy-border);
+    border-radius: 20px;
+    padding: 0.3rem 0.75rem;
+}
+
+.top-co-name {
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--slate-300);
+}
+
+.top-co-count {
+    font-size: 0.72rem;
+    font-weight: 700;
+    background: var(--accent-dim);
+    color: var(--accent);
+    border-radius: 10px;
+    padding: 0.1rem 0.45rem;
 }
 
 /* ── Table card ─────────────────────────────────────────────────────────── */
@@ -347,10 +409,12 @@
     border-radius: 50%; flex-shrink: 0;
 }
 
-.status-placed  { background: var(--green-dim); color: var(--green); }
-.status-placed::before  { background: var(--green); }
-.status-pending { background: var(--amber-dim); color: var(--amber); }
-.status-pending::before { background: var(--amber); }
+.status-placed    { background: var(--green-dim); color: var(--green); }
+.status-placed::before    { background: var(--green); }
+.status-pending   { background: var(--amber-dim); color: var(--amber); }
+.status-pending::before   { background: var(--amber); }
+.status-optedout  { background: var(--red-dim);   color: var(--red-soft); }
+.status-optedout::before  { background: var(--red-soft); }
 
 /* Empty state */
 .empty-state {
