@@ -229,3 +229,37 @@
     .company-grid { grid-template-columns: 1fr; }
     .detail-card { padding: 1.5rem; }
 }
+
+
+
+
+/* Company Card Info */
+.info-label {
+    display: block;
+    color: #cbd5e1 !important;
+    font-size: 11px;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    margin-bottom: 6px;
+}
+
+.info-value {
+    display: block;
+    color: #ffffff !important;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.package-val {
+    color: #4dabf7 !important;
+    font-weight: 700;
+}
+
+.eligible-val {
+    color: #ffffff !important;
+}
+
+.company-name-head {
+    color: #ffffff !important;
+}
